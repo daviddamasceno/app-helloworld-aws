@@ -1,17 +1,5 @@
 # Terraform Hello World
 
-## Introdução
-
-O [Terraform](https://www.terraform.io/) é uma ferramenta para construir, alterar e controlar a infraestrutura de TI de forma segura e eficiente.
-
-O Terraform pode gerenciar provedores de serviços existentes e populares como OpenStack, Azure, AWS, Digital Ocean, entre outros, bem como soluções internas personalizadas.
-
-A infraestrutura que o Terraform pode gerenciar inclui componentes de baixo nível, como instâncias de computação, armazenamento e redes, bem como componentes de alto nível, como entradas DNS, recursos SaaS, etc.
-
-Infraestrutura usada neste projeto:
-
-![Infraestrutura](./images/app-helloworld-aws.png)
-
 ## Instalar o Terraform CLI (Command Line Interface)
 
 1. Siga o passo-a-passo da página [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
