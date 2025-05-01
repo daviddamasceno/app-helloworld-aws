@@ -38,6 +38,19 @@
    output = json
    ```
 
+3. Dentro do diretório *terraform/.keys/*, crie o arquivo *key_name* e o arquivo *public_key* inclua o conteúdo da sua chave ssh, no "key_name" coloque o nome da chave e "public_key" coloque a chave sem aspas e sem pular linha.
+   
+   *key_name*
+   ```
+   nome_da_chave
+   ```
+
+   *public_key*
+   ```
+   ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... user@host
+   ```
+
+
 ## Inicializar o Terraform
 
 1. Abra o terminal, acesse o diretório "terraform" e execute o comando abaixo.
@@ -64,7 +77,7 @@
 2. Crie os recursos de TI na AWS do arquivo tfplan.
 
    ```
-   terraform apply -out tfplan
+   terraform apply "tfplan"
    ```
 
 3. Verifique as informações dos recursos de TI criados na AWS.
