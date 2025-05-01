@@ -38,7 +38,7 @@
    output = json
    ```
 
-3. Dentro do diretório *terraform/.keys/*, crie o arquivo *key_name* e o arquivo *public_key* inclua o conteúdo da sua chave ssh, no "key_name" coloque o nome da chave e "public_key" coloque a chave sem aspas e sem pular linha.
+4. Dentro do diretório *terraform/.keys/*, crie o arquivo *key_name* e o arquivo *public_key* inclua o conteúdo da sua chave ssh, no "key_name" coloque o nome da chave e "public_key" coloque a chave sem aspas e sem pular linha.
    
    *key_name*
    ```
