@@ -23,6 +23,41 @@ resource "aws_security_group" "Ec2_Security_Group" {
         protocol    = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+    ingress {
+        description = "TCP/2377 from swarm network"
+        from_port   = 2377
+        to_port     = 2377
+        protocol    = "tcp"
+        cidr_blocks = [aws_subnet.Prod_Public_Subnet.cidr_block]
+    }
+    ingress {
+        description = "UDP/4789 from swarm network"
+        from_port   = 4789
+        to_port     = 4789
+        protocol    = "udp"
+        cidr_blocks = [aws_subnet.Prod_Public_Subnet.cidr_block]
+    }
+    ingress {
+        description = "UDP/7946 from swarm network"
+        from_port   = 7946
+        to_port     = 7946
+        protocol    = "udp"
+        cidr_blocks = [aws_subnet.Prod_Public_Subnet.cidr_block]
+    }
+    ingress {
+        description = "TCP/7946 from swarm network"
+        from_port   = 7946
+        to_port     = 7946
+        protocol    = "tcp"
+        cidr_blocks = [aws_subnet.Prod_Public_Subnet.cidr_block]
+    }
+    ingress {
+        description = "TCP/9000 from Portainer"
+        from_port   = 9000
+        to_port     = 9000
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
     tags = {
         Name = "Work Security Group"
     }
@@ -32,7 +67,7 @@ data "template_file" "user_data" {
     template = "${file("./scripts/user_data.sh")}"
 }
 
-resource "aws_instance" "hello-instance" {
+resource "aws_instance" "manager" {
     ami                    = "ami-084568db4383264d4"
     instance_type          = "t2.micro"
     key_name                = aws_key_pair.key_pair.key_name
@@ -40,7 +75,30 @@ resource "aws_instance" "hello-instance" {
     vpc_security_group_ids = [aws_security_group.Ec2_Security_Group.id]
     user_data              = "${base64encode(data.template_file.user_data.rendered)}"
     tags = {
-        Name = "hello-instance"
+        Name = "manager"
     }
 }
 
+resource "aws_instance" "worker1" {
+    ami                    = "ami-084568db4383264d4"
+    instance_type          = "t2.micro"
+    key_name                = aws_key_pair.key_pair.key_name
+    subnet_id              = aws_subnet.Prod_Public_Subnet.id
+    vpc_security_group_ids = [aws_security_group.Ec2_Security_Group.id]
+    user_data              = "${base64encode(data.template_file.user_data.rendered)}"
+    tags = {
+        Name = "worker 1"
+    }
+}
+
+resource "aws_instance" "worker2" {
+    ami                    = "ami-084568db4383264d4"
+    instance_type          = "t2.micro"
+    key_name                = aws_key_pair.key_pair.key_name
+    subnet_id              = aws_subnet.Prod_Public_Subnet.id
+    vpc_security_group_ids = [aws_security_group.Ec2_Security_Group.id]
+    user_data              = "${base64encode(data.template_file.user_data.rendered)}"
+    tags = {
+        Name = "worker 2"
+    }
+}
