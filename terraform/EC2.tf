@@ -1,6 +1,6 @@
-resource "aws_security_group" "Hello_Security_Group" {
-    name        = "Hello_Security_Group"
-    description = "Hello Security Group"
+resource "aws_security_group" "Ec2_Security_Group" {
+    name        = "Ec2_Security_Group"
+    description = "Ec2 Security_Group"
     vpc_id      = aws_vpc.prod_VPC.id
     egress {
         description = "All to All"
@@ -37,7 +37,7 @@ resource "aws_instance" "hello-instance" {
     instance_type          = "t2.micro"
     key_name                = aws_key_pair.key_pair.key_name
     subnet_id              = aws_subnet.Prod_Public_Subnet.id
-    vpc_security_group_ids = [aws_security_group.Hello_Security_Group.id]
+    vpc_security_group_ids = [aws_security_group.Ec2_Security_Group.id]
     user_data              = "${base64encode(data.template_file.user_data.rendered)}"
     tags = {
         Name = "hello-instance"
